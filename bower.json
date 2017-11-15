@@ -1,0 +1,19 @@
+{
+  "name": "sarine.viewer.color",
+  "version": "0.6.2",
+  "main": "dist/sarine.viewer.color.js",
+  "ignore": [
+    ".git",
+    "node_modules",
+    "package.json",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "sarine.viewer": "https://github.com/SarineTechnologies/sarine.viewer.git#v0.3.6"
+  },
+  "exportsOverride": {
+        "sarine.*": {        
+          "coffee": "**/*.coffee"
+        }
+    }
+}
