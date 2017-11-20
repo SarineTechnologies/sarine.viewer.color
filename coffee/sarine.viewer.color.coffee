@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:43 PM 
+sarine.viewer.color - v0.6.2 -  Monday, November 20th, 2017, 3:17:33 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -19,13 +19,12 @@ class SarineColor extends Viewer
       {element:'script' ,src:'owl.carousel.min.js'}
 
     ]
-
     #css = '.owl-carousel {width: ' + @atomConfig.ImageSize.width + 'px; height: ' + @atomConfig.ImageSize.height + 'px}'
     #css += '.spinner {margin-top: 40% !important}'
-    css =  '.owl-carousel .item{  margin: 1px;border-radius:25px; }'
+    css =  '.owl-carousel .item{margin:13px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}'
     css += '.owl-carousel .item img{  display: block;  width: 100%;  height: auto; }'
-    css += ".owl-item.active.center{    -webkit-transform: scale(1.7)}"
-    css+= '.owl-stage {height:300px;padding-top:20px}';
+    css += ".owl-item.active.center{    -webkit-transform: scale(1.5)}"
+    css+=  '.owl-stage {height:300px;padding-top:20px}';
     head = document.head || document.getElementsByTagName('head')[0]
     style = document.createElement('style')
     style.type = 'text/css'
