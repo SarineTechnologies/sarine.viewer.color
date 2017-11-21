@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.2 -  Monday, November 20th, 2017, 3:17:33 PM 
+sarine.viewer.color - v0.6.2 -  Tuesday, November 21st, 2017, 5:00:29 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -34,11 +34,10 @@ class SarineColor extends Viewer
       style.appendChild(document.createTextNode(css))
     head.appendChild(style)
 
-    @pluginDimention = if @atomConfig.ImageSize && @atomConfig.ImageSize.height then @atomConfig.ImageSize.height else 300
 
     @domain = window.coreDomain # window.stones[0].viewersBaseUrl.replace('content/viewers/', '')
 
-    @numberOfImages = @atomConfig.NumberOfImages
+    @numberOfImages = @atomConfig.NumberOfImages || 17
   convertElement : () ->
     @element.append '<div class="owl-carousel owl-theme"></div>'
 
@@ -55,7 +54,7 @@ class SarineColor extends Viewer
 
     element
     for resource in @resources
-      debugger
+
       element = document.createElement(resource.element)
       if(resource.element == 'script')
         $(document.body).append(element)
@@ -74,7 +73,9 @@ class SarineColor extends Viewer
     defer = $.Deferred()
     _t = @
     @preloadAssets ()->
-      @firstImageName = _t.atomConfig.ImagePatternClean.replace("*","1")
+
+      @pattern =  _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+      @firstImageName = @pattern.replace("*","1")
       src =  _t.colorAssets + "/" + @firstImageName + cacheVersion
 
       _t.loadImage(src).then((img)->
@@ -99,8 +100,9 @@ class SarineColor extends Viewer
     @owlCarousel = @element.find('.owl-carousel')
     @imagePath =  @colorAssets + "/"
 
-    @filePrefix = @atomConfig.ImagePatternClean.replace(/\*.[^/.]+$/,'')
-    @fileExt = ".#{@atomConfig.ImagePatternClean.split('.').pop()}"
+    @pattern =  @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+    @filePrefix = @pattern.replace(/\*.[^/.]+$/,'')
+    @fileExt = ".#{@pattern.split('.').pop()}"
     i=1
     while i < @numberOfImages
         @newPath = @imagePath+@filePrefix+i+@fileExt
