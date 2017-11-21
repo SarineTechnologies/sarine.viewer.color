@@ -100,6 +100,17 @@ module.exports = function(grunt) {
                 src: [target + 'coffee/<%= config.name %>.bundle.coffee']
 
             }
+        },
+        copy: {
+            dist: {
+                files: [{
+                    cwd: 'color-assets',
+                    src: '**/*',
+                    dest: 'dist/color-assets',
+                    expand: true
+
+                }]
+            }
         }
     })
     grunt.registerTask('bundle', [
@@ -114,6 +125,7 @@ module.exports = function(grunt) {
         'concat:coffee',
         'coffee:build',
         'uglify',
+        'copy:dist',
         'clean:postbuild'
     ]);
     grunt.registerMultiTask('commentsCoffee', 'Remove comments from production code', function() {
