@@ -11,7 +11,7 @@ class SarineColor extends Viewer
       1: "D",2:"E",3:"F",4:"G", 5:"H" , 6:"I", 7:"J",8:"K", 9: "L",10:"M",11:"N",12:"OP",13:"QR", 14:"ST",15:"UV",16: "WX",17:"YZ"
     }
     @resourcesPrefix = options.baseUrl + "atomic/v1/assets/"
-    @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean/"
+    @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean"
     @atomConfig = configuration.experiences.filter((exp)-> exp.atom == "colorExperience")[0]
     @resources = [
       {element:'link'   ,src:'owl.carousel.css'},
