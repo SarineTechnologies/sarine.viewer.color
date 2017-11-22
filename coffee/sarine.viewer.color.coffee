@@ -21,9 +21,9 @@ class SarineColor extends Viewer
     ]
     #css = '.owl-carousel {width: ' + @atomConfig.ImageSize.width + 'px; height: ' + @atomConfig.ImageSize.height + 'px}'
     #css += '.spinner {margin-top: 40% !important}'
-    css =  '.owl-carousel .item{margin:13px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}'
+    css =  '.owl-carousel .item{margin:22px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}'
     css += '.owl-carousel .item img{  display: block;  width: 100%;  height: auto; }'
-    css += ".owl-item.active.center{    -webkit-transform: scale(1.5)}"
+    css += ".owl-item.active.center{    -webkit-transform: scale(2.3)}"
     css+=  '.owl-stage {height:300px;padding-top:20px}';
     head = document.head || document.getElementsByTagName('head')[0]
     style = document.createElement('style')
