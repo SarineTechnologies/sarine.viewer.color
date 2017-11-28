@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM 
+sarine.viewer.color - v0.6.2 -  Thursday, November 23rd, 2017, 11:05:37 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 
@@ -66,7 +66,7 @@ class SarineColor extends Viewer
       1: "D",2:"E",3:"F",4:"G", 5:"H" , 6:"I", 7:"J",8:"K", 9: "L",10:"M",11:"N",12:"OP",13:"QR", 14:"ST",15:"UV",16: "WX",17:"YZ"
     }
     @resourcesPrefix = options.baseUrl + "atomic/v1/assets/"
-    @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean/"
+    @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean"
     @atomConfig = configuration.experiences.filter((exp)-> exp.atom == "colorExperience")[0]
     @resources = [
       {element:'link'   ,src:'owl.carousel.css'},
@@ -74,13 +74,13 @@ class SarineColor extends Viewer
       {element:'script' ,src:'owl.carousel.min.js'}
 
     ]
-
     #css = '.owl-carousel {width: ' + @atomConfig.ImageSize.width + 'px; height: ' + @atomConfig.ImageSize.height + 'px}'
     #css += '.spinner {margin-top: 40% !important}'
-    css =  '.owl-carousel .item{  margin: 1px;border-radius:25px; }'
+    css =  '.owl-carousel .item{margin:22px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}'
     css += '.owl-carousel .item img{  display: block;  width: 100%;  height: auto; }'
-    css += ".owl-item.active.center{    -webkit-transform: scale(1.7)}"
-    css+= '.owl-stage {height:300px;padding-top:20px}';
+    css += ".owl-item.active.center{    -webkit-transform: scale(2.3)}"
+    css+=  '.owl-stage {height:300px;padding-top:20px}';
+    css+=  '.owl-stage-outer {max-height:130px;}';
     head = document.head || document.getElementsByTagName('head')[0]
     style = document.createElement('style')
     style.type = 'text/css'
@@ -90,11 +90,10 @@ class SarineColor extends Viewer
       style.appendChild(document.createTextNode(css))
     head.appendChild(style)
 
-    @pluginDimention = if @atomConfig.ImageSize && @atomConfig.ImageSize.height then @atomConfig.ImageSize.height else 300
 
     @domain = window.coreDomain # window.stones[0].viewersBaseUrl.replace('content/viewers/', '')
 
-    @numberOfImages = @atomConfig.NumberOfImages
+    @numberOfImages = @atomConfig.NumberOfImages || 17
   convertElement : () ->
     @element.append '<div class="owl-carousel owl-theme"></div>'
 
@@ -111,7 +110,7 @@ class SarineColor extends Viewer
 
     element
     for resource in @resources
-      debugger
+
       element = document.createElement(resource.element)
       if(resource.element == 'script')
         $(document.body).append(element)
@@ -130,7 +129,9 @@ class SarineColor extends Viewer
     defer = $.Deferred()
     _t = @
     @preloadAssets ()->
-      @firstImageName = _t.atomConfig.ImagePatternClean.replace("*","1")
+
+      @pattern =  _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+      @firstImageName = @pattern.replace("*","1")
       src =  _t.colorAssets + "/" + @firstImageName + cacheVersion
 
       _t.loadImage(src).then((img)->
@@ -155,8 +156,9 @@ class SarineColor extends Viewer
     @owlCarousel = @element.find('.owl-carousel')
     @imagePath =  @colorAssets + "/"
 
-    @filePrefix = @atomConfig.ImagePatternClean.replace(/\*.[^/.]+$/,'')
-    @fileExt = ".#{@atomConfig.ImagePatternClean.split('.').pop()}"
+    @pattern =  @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+    @filePrefix = @pattern.replace(/\*.[^/.]+$/,'')
+    @fileExt = ".#{@pattern.split('.').pop()}"
     i=1
     while i < @numberOfImages
         @newPath = @imagePath+@filePrefix+i+@fileExt

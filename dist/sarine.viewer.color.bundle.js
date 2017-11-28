@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM 
+sarine.viewer.color - v0.6.2 -  Thursday, November 23rd, 2017, 11:05:37 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -126,7 +126,7 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
         17: "YZ"
       };
       this.resourcesPrefix = options.baseUrl + "atomic/v1/assets/";
-      this.colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean/";
+      this.colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean";
       this.atomConfig = configuration.experiences.filter(function(exp) {
         return exp.atom === "colorExperience";
       })[0];
@@ -139,10 +139,11 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
           src: 'owl.carousel.min.js'
         }
       ];
-      css = '.owl-carousel .item{  margin: 1px;border-radius:25px; }';
+      css = '.owl-carousel .item{margin:22px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}';
       css += '.owl-carousel .item img{  display: block;  width: 100%;  height: auto; }';
-      css += ".owl-item.active.center{    -webkit-transform: scale(1.7)}";
+      css += ".owl-item.active.center{    -webkit-transform: scale(2.3)}";
       css += '.owl-stage {height:300px;padding-top:20px}';
+      css += '.owl-stage-outer {max-height:130px;}';
       head = document.head || document.getElementsByTagName('head')[0];
       style = document.createElement('style');
       style.type = 'text/css';
@@ -152,9 +153,8 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
         style.appendChild(document.createTextNode(css));
       }
       head.appendChild(style);
-      this.pluginDimention = this.atomConfig.ImageSize && this.atomConfig.ImageSize.height ? this.atomConfig.ImageSize.height : 300;
       this.domain = window.coreDomain;
-      this.numberOfImages = this.atomConfig.NumberOfImages;
+      this.numberOfImages = this.atomConfig.NumberOfImages || 17;
     }
 
     SarineColor.prototype.convertElement = function() {
@@ -182,7 +182,6 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         resource = _ref[_i];
-        debugger;
         element = document.createElement(resource.element);
         if (resource.element === 'script') {
           $(document.body).append(element);
@@ -207,7 +206,8 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
       _t = this;
       this.preloadAssets(function() {
         var src;
-        this.firstImageName = _t.atomConfig.ImagePatternClean.replace("*", "1");
+        this.pattern = _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+        this.firstImageName = this.pattern.replace("*", "1");
         src = _t.colorAssets + "/" + this.firstImageName + cacheVersion;
         return _t.loadImage(src).then(function(img) {
           if (img.src.indexOf('data:image') === -1 && img.src.indexOf('no_stone') === -1) {
@@ -236,8 +236,9 @@ sarine.viewer.color - v0.6.2 -  Wednesday, November 15th, 2017, 7:00:42 PM
       defer = $.Deferred();
       this.owlCarousel = this.element.find('.owl-carousel');
       this.imagePath = this.colorAssets + "/";
-      this.filePrefix = this.atomConfig.ImagePatternClean.replace(/\*.[^/.]+$/, '');
-      this.fileExt = "." + (this.atomConfig.ImagePatternClean.split('.').pop());
+      this.pattern = this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+      this.filePrefix = this.pattern.replace(/\*.[^/.]+$/, '');
+      this.fileExt = "." + (this.pattern.split('.').pop());
       i = 1;
       while (i < this.numberOfImages) {
         this.newPath = this.imagePath + this.filePrefix + i + this.fileExt;
