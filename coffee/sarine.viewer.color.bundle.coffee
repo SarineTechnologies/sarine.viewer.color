@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.2 -  Thursday, November 23rd, 2017, 11:05:37 AM 
+sarine.viewer.color - v0.6.2 -  Thursday, November 30th, 2017, 2:33:47 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 
@@ -77,7 +77,7 @@ class SarineColor extends Viewer
     #css = '.owl-carousel {width: ' + @atomConfig.ImageSize.width + 'px; height: ' + @atomConfig.ImageSize.height + 'px}'
     #css += '.spinner {margin-top: 40% !important}'
     css =  '.owl-carousel .item{margin:22px;border-color: gray; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out;}'
-    css += '.owl-carousel .item img{  display: block;  width: 100%;  height: auto; }'
+    css += '.owl-carousel .item img{  display: block;  width: 120%;  margin-left: -10%;  height: auto; }'  
     css += ".owl-item.active.center{    -webkit-transform: scale(2.3)}"
     css+=  '.owl-stage {height:300px;padding-top:20px}';
     css+=  '.owl-stage-outer {max-height:130px;}';
@@ -184,6 +184,7 @@ class SarineColor extends Viewer
       onReady: () ->
         defer.resolve(@)
     });
+
     defer
 
   play : () -> return
