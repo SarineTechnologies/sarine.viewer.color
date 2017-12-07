@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.6.6 -  Tuesday, December 5th, 2017, 11:34:32 AM 
+sarine.viewer.color - v0.6.7 -  Thursday, December 7th, 2017, 10:40:53 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -37,6 +37,25 @@ sarine.viewer.color - v0.6.6 -  Tuesday, December 5th, 2017, 11:34:32 AM
         16: "WX",
         17: "YZ"
       };
+      this.keysToIndex = {
+        "D": 1,
+        "E": 2,
+        "F": 3,
+        "G": 4,
+        "H": 5,
+        "I": 6,
+        "J": 7,
+        "K": 8,
+        "L": 9,
+        "M": 10,
+        "N": 11,
+        "OP": 12,
+        "QR": 13,
+        "ST": 14,
+        "UV": 15,
+        "WX": 16,
+        "YZ": 17
+      };
       this.resourcesPrefix = options.baseUrl + "atomic/v1/assets/";
       this.colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean";
       this.atomConfig = configuration.experiences.filter(function(exp) {
@@ -52,9 +71,9 @@ sarine.viewer.color - v0.6.6 -  Tuesday, December 5th, 2017, 11:34:32 AM
         }
       ];
       css = '.owl-carousel .item{margin:2px;border-color: gray;cursor: pointer; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out; font: initial; }';
-      css += '.owl-carousel .item img{  display: block;  width: 120%;  margin-left: -10%;  height: auto; }';
+      css += '.owl-carousel .item img{  display: block;  width: 110%;  margin-left: -5%;  height: auto; }';
       css += '.owl-carousel  .owl-item{position:initial;}';
-      css += ".owl-item.active.center{    -webkit-transform: scale(1.8);    background: white;    z-index: 10000;    position: relative;}";
+      css += ".owl-item.active.center{    -webkit-transform: scale(1.3);    background: white;    z-index: 10000;    position: relative;}";
       css += '.owl-stage {height:300px;padding-top:20px;}';
       css += '.owl-stage-outer {max-height:130px;    padding-top: 40px;}';
       head = document.head || document.getElementsByTagName('head')[0];
@@ -117,78 +136,120 @@ sarine.viewer.color - v0.6.6 -  Tuesday, December 5th, 2017, 11:34:32 AM
       var defer, _t;
       defer = $.Deferred();
       _t = this;
-      this.preloadAssets(function() {
-        var src;
-        this.pattern = _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
-        this.firstImageName = this.pattern.replace("*", "1");
-        src = _t.colorAssets + "/" + this.firstImageName + cacheVersion;
-        return _t.loadImage(src).then(function(img) {
-          if (img.src.indexOf('data:image') === -1 && img.src.indexOf('no_stone') === -1) {
-            return defer.resolve(_t);
-          } else {
-            _t.isAvailble = false;
-            _t.element.empty();
-            this.canvas = $("<canvas>");
-            this.canvas[0].width = img.width;
-            this.canvas[0].height = img.height;
-            this.ctx = this.canvas[0].getContext('2d');
-            this.ctx.drawImage(img, 0, 0, img.width, img.height);
-            this.canvas.attr({
-              'class': 'no_stone'
-            });
-            _t.element.append(this.canvas);
-            return defer.resolve(_t);
-          }
+      this.stoneColor = window.stones[0].stoneProperties.color;
+      if (!_t.keysToIndex.hasOwnProperty(this.stoneColor)) {
+        this.failed();
+        defer.resolve(this);
+      } else {
+        this.preloadAssets(function() {
+          var src;
+          this.pattern = _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+          this.firstImageName = this.pattern.replace("*", "1");
+          src = _t.colorAssets + "/" + this.firstImageName + cacheVersion;
+          return _t.loadImage(src).then(function(img) {
+            if (img.src.indexOf('data:image') === -1 && img.src.indexOf('no_stone') === -1) {
+              return defer.resolve(_t);
+            } else {
+              _t.isAvailble = false;
+              _t.element.empty();
+              this.div = $("<div>");
+              this.div.attr({
+                'style': 'background-color:gray;width:150px;margin:0 auto;'
+              });
+              this.canvas = $("<canvas>");
+              this.canvas[0].width = img.width;
+              this.canvas[0].height = img.height;
+              this.ctx = this.canvas[0].getContext('2d');
+              this.ctx.drawImage(img, 0, 0, img.width, img.height);
+              this.canvas.attr({
+                'class': 'no_stone'
+              });
+              this.div.append(this.canvas);
+              _t.element.append(this.div);
+              return defer.resolve(_t);
+            }
+          });
         });
-      });
+      }
       return defer;
     };
 
-    SarineColor.prototype.full_init = function() {
-      var defer, i, newImage, newSpan;
+    SarineColor.prototype.failed = function() {
+      var defer, _t;
+      _t = this;
       defer = $.Deferred();
-      this.owlCarousel = this.element.find('.owl-carousel');
-      this.imagePath = this.colorAssets + "/";
-      this.pattern = this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
-      this.filePrefix = this.pattern.replace(/\*.[^/.]+$/, '');
-      this.fileExt = "." + (this.pattern.split('.').pop());
-      i = 1;
-      while (i <= this.numberOfImages) {
-        this.newPath = this.imagePath + this.filePrefix + i + this.fileExt;
-        this.container = $("<div>");
-        this.container.attr({
-          "class": "item"
+      return _t.loadImage(_t.callbackPic).then(function(img) {
+        _t.isAvailble = false;
+        _t.element.empty();
+        this.div = $("<div>");
+        this.div.attr({
+          'style': 'background-color:gray;width:150px;margin:0 auto;'
         });
-        newImage = $("<img>");
-        newImage.attr({
-          src: this.newPath
+        this.canvas = $("<canvas>");
+        this.canvas[0].width = img.width;
+        this.canvas[0].height = img.height;
+        this.ctx = this.canvas[0].getContext('2d');
+        this.ctx.drawImage(img, 0, 0, img.width, img.height);
+        this.canvas.attr({
+          'class': 'no_stone'
         });
-        newSpan = $("<span>").html(this.colorGradeMaps[i]);
-        newSpan.attr({
-          "class": "color-grade-span"
-        });
-        this.container.append(newSpan);
-        this.container.append(newImage);
-        this.owlCarousel.append(this.container);
-        i++;
-      }
-      this.owlCarousel.owlCarousel({
-        center: true,
-        dots: true,
-        margin: 1,
-        afterMove: function() {
-          $('owl-item').css({
-            transform: "none"
-          });
-          return $('active').eq(1).css({
-            transform: "scale(1.9)",
-            zIndex: 3000
-          });
-        },
-        onReady: function() {
-          return defer.resolve(this);
-        }
+        this.div.append(this.canvas);
+        _t.element.append(this.div);
+        return defer.resolve(_t);
       });
+    };
+
+    SarineColor.prototype.full_init = function() {
+      var defer, i, newImage, newSpan, _t;
+      defer = $.Deferred();
+      _t = this;
+      this.stoneColor = window.stones[0].stoneProperties.color;
+      if (_t.keysToIndex.hasOwnProperty(this.stoneColor)) {
+        this.owlCarousel = this.element.find('.owl-carousel');
+        this.imagePath = this.colorAssets + "/";
+        this.pattern = this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+        this.filePrefix = this.pattern.replace(/\*.[^/.]+$/, '');
+        this.fileExt = "." + (this.pattern.split('.').pop());
+        i = 1;
+        while (i <= this.numberOfImages) {
+          this.newPath = this.imagePath + this.filePrefix + i + this.fileExt;
+          this.container = $("<div>");
+          this.container.attr({
+            "class": "item"
+          });
+          newImage = $("<img>");
+          newImage.attr({
+            src: this.newPath
+          });
+          newSpan = $("<span>").html(this.colorGradeMaps[i]);
+          newSpan.attr({
+            "class": "color-grade-span"
+          });
+          this.container.append(newSpan);
+          this.container.append(newImage);
+          this.owlCarousel.append(this.container);
+          i++;
+        }
+        this.owlCarousel.owlCarousel({
+          center: true,
+          dots: true,
+          margin: 1,
+          afterMove: function() {
+            $('owl-item').css({
+              transform: "none"
+            });
+            return $('active').eq(1).css({
+              transform: "scale(1.9)",
+              zIndex: 3000
+            });
+          },
+          onReady: function() {
+            return defer.resolve(this);
+          }
+        });
+      } else {
+        defer.resolve(this);
+      }
       return defer;
     };
 
