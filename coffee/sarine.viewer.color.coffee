@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.7 -  Thursday, December 7th, 2017, 10:40:53 AM 
+sarine.viewer.color - v0.6.7 -  Sunday, December 10th, 2017, 9:44:30 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -113,16 +113,14 @@ class SarineColor extends Viewer
     _t.loadImage(_t.callbackPic).then (img)->
       _t.isAvailble = false
       _t.element.empty()
-      @div  =  $("<div>")
-      @div.attr {'style' : 'background-color:gray;width:150px;margin:0 auto;'}
       @canvas = $("<canvas>")
       @canvas[0].width = img.width
       @canvas[0].height = img.height
       @ctx = @canvas[0].getContext('2d')
       @ctx.drawImage(img, 0, 0, img.width, img.height)
       @canvas.attr {'class' : 'no_stone'}
-      @div.append(@canvas)
-      _t.element.append(@div)
+
+      _t.element.append(@canvas)
       defer.resolve(_t)
   full_init : ()->
     defer = $.Deferred()

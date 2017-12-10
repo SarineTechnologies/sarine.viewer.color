@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.6.7 -  Thursday, December 7th, 2017, 10:40:53 AM 
+sarine.viewer.color - v0.6.7 -  Sunday, December 10th, 2017, 9:44:30 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -181,10 +181,6 @@ sarine.viewer.color - v0.6.7 -  Thursday, December 7th, 2017, 10:40:53 AM
       return _t.loadImage(_t.callbackPic).then(function(img) {
         _t.isAvailble = false;
         _t.element.empty();
-        this.div = $("<div>");
-        this.div.attr({
-          'style': 'background-color:gray;width:150px;margin:0 auto;'
-        });
         this.canvas = $("<canvas>");
         this.canvas[0].width = img.width;
         this.canvas[0].height = img.height;
@@ -193,8 +189,7 @@ sarine.viewer.color - v0.6.7 -  Thursday, December 7th, 2017, 10:40:53 AM
         this.canvas.attr({
           'class': 'no_stone'
         });
-        this.div.append(this.canvas);
-        _t.element.append(this.div);
+        _t.element.append(this.canvas);
         return defer.resolve(_t);
       });
     };
