@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.6.7 -  Sunday, December 10th, 2017, 9:44:30 AM 
+sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -229,6 +229,18 @@ sarine.viewer.color - v0.6.7 -  Sunday, December 10th, 2017, 9:44:30 AM
           center: true,
           dots: true,
           margin: 1,
+          onInitialized: function(elem) {
+            var _this;
+            console.log('owl carousel initialized');
+            _this = elem;
+            return setTimeout((function() {
+              debugger;
+              var _indexOfStone;
+              this.stoneColor = window.stones[0].stoneProperties.color;
+              _indexOfStone = _t.keysToIndex[this.stoneColor];
+              return $('.owl-carousel').trigger('to.owl.carousel', _indexOfStone - 1);
+            }), 200);
+          },
           afterMove: function() {
             $('owl-item').css({
               transform: "none"
