@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM 
+sarine.viewer.color - v0.6.7 -  Tuesday, December 12th, 2017, 11:29:24 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -174,7 +174,7 @@ sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM
       }
       head.appendChild(style);
       this.domain = window.coreDomain;
-      this.numberOfImages = this.atomConfig.NumberOfImages || 17;
+      this.numberOfImages = this.atomConfig && this.atomConfig.NumberOfImages || 17;
     }
 
     SarineColor.prototype.convertElement = function() {
@@ -231,7 +231,7 @@ sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM
       } else {
         this.preloadAssets(function() {
           var src;
-          this.pattern = _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+          this.pattern = _t.atomConfig && _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
           this.firstImageName = this.pattern.replace("*", "1");
           src = _t.colorAssets + "/" + this.firstImageName + cacheVersion;
           return _t.loadImage(src).then(function(img) {
@@ -290,7 +290,7 @@ sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM
       if (_t.keysToIndex.hasOwnProperty(this.stoneColor)) {
         this.owlCarousel = this.element.find('.owl-carousel');
         this.imagePath = this.colorAssets + "/";
-        this.pattern = this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
+        this.pattern = this.atomConfig && this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
         this.filePrefix = this.pattern.replace(/\*.[^/.]+$/, '');
         this.fileExt = "." + (this.pattern.split('.').pop());
         i = 1;

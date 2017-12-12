@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.6.7 -  Monday, December 11th, 2017, 5:41:34 PM 
+sarine.viewer.color - v0.6.7 -  Tuesday, December 12th, 2017, 11:29:24 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -40,7 +40,7 @@ class SarineColor extends Viewer
 
     @domain = window.coreDomain # window.stones[0].viewersBaseUrl.replace('content/viewers/', '')
 
-    @numberOfImages = @atomConfig.NumberOfImages || 17
+    @numberOfImages =@atomConfig && @atomConfig.NumberOfImages || 17
   convertElement : () ->
     @element.append '<div class="owl-carousel owl-theme"></div>'
 
@@ -83,7 +83,7 @@ class SarineColor extends Viewer
     else
       @preloadAssets ()->
 
-        @pattern =  _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+        @pattern = _t.atomConfig && _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
         @firstImageName = @pattern.replace("*","1")
         src =  _t.colorAssets + "/" + @firstImageName + cacheVersion
 
@@ -130,7 +130,7 @@ class SarineColor extends Viewer
       @owlCarousel = @element.find('.owl-carousel')
       @imagePath =  @colorAssets + "/"
 
-      @pattern =  @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
+      @pattern = @atomConfig && @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
       @filePrefix = @pattern.replace(/\*.[^/.]+$/,'')
       @fileExt = ".#{@pattern.split('.').pop()}"
       i=1
