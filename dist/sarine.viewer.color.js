@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.7.1 -  Wednesday, December 13th, 2017, 11:00:16 AM 
+sarine.viewer.color - v0.7.1 -  Wednesday, December 13th, 2017, 2:18:27 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -30,12 +30,12 @@ sarine.viewer.color - v0.7.1 -  Wednesday, December 13th, 2017, 11:00:16 AM
         9: "L",
         10: "M",
         11: "N",
-        12: "OP",
-        13: "QR",
-        14: "ST",
-        15: "UV",
-        16: "WX",
-        17: "YZ"
+        12: "O-P",
+        13: "Q-R",
+        14: "S-T",
+        15: "U-V",
+        16: "W-X",
+        17: "Y-Z"
       };
       this.keysToIndex = {
         "D": 1,
@@ -49,12 +49,12 @@ sarine.viewer.color - v0.7.1 -  Wednesday, December 13th, 2017, 11:00:16 AM
         "L": 9,
         "M": 10,
         "N": 11,
-        "OP": 12,
-        "QR": 13,
-        "ST": 14,
-        "UV": 15,
-        "WX": 16,
-        "YZ": 17
+        "O-P": 12,
+        "Q-R": 13,
+        "S-T": 14,
+        "U-V": 15,
+        "W-X": 16,
+        "Y-Z": 17
       };
       this.resourcesPrefix = options.baseUrl + "atomic/v1/assets/";
       this.colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean";
