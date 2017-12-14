@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 9:32:03 AM 
+sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 9:56:51 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 
@@ -185,10 +185,10 @@ class SarineColor extends Viewer
     if(_t.keysToIndex.hasOwnProperty(@stoneColor))
       @owlCarousel = @element.find('.owl-carousel')
       @imagePath =  @colorAssets + "/"
-      if($(@element).parent().parent().parent().parent().hasClass("slide__content--colorExperience"))
-         $(@element).parent().parent().parent().parent().css('padding:0!important')
+      if($(this.element).parent().parent().parent().parent().parent().hasClass('custom--colorExperience'))
+        $(@element).parent().parent().parent().parent().parent().parent().css('padding:0!important')
       else
-         $(@element).parent().parent().parent().parent().parent().parent().css('padding:0!important')
+        $(@element).parent().parent().parent().parent().css('padding:0!important')
       @pattern = @atomConfig && @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
       @filePrefix = @pattern.replace(/\*.[^/.]+$/,'')
       @fileExt = ".#{@pattern.split('.').pop()}"
