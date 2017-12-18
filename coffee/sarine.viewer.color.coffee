@@ -10,7 +10,7 @@ class SarineColor extends Viewer
     @colorGradeMaps = {
       1: "D",2:"E",3:"F",4:"G", 5:"H" , 6:"I", 7:"J",8:"K", 9: "L",10:"M",11:"N",12:"O-P",13:"Q-R", 14:"S-T",15:"U-V",16: "W-X",17:"Y-Z"
     }
-    @keysToIndex= {      "D": 1,      "E" :2,      "F" :3,      "G" :4,      "H" :5,      "I" :6,      "J" :7,      "K" :8,      "L" :9,      "M" :10,      "N" :11,      "O-P":12,      "Q-R":13,      "S-T":14,      "U-V":15,      "W-X":16,      "Y-Z":17    }
+    @keysToIndex= {      "D": 1,      "E" :2,      "F" :3,      "G" :4,      "H" :5,      "I" :6,      "J" :7,      "K" :8,      "L" :9,      "M" :10,      "N" :11,      "OP":12,      "QR":13,      "ST":14,      "UV":15,      "WX":16,      "YZ":17    }
     @resourcesPrefix = options.baseUrl + "atomic/v1/assets/"
     @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean"
     @atomConfig = configuration.experiences.filter((exp)-> exp.atom == "colorExperience")[0]
@@ -164,7 +164,6 @@ class SarineColor extends Viewer
           console.log('owl carousel initialized')
           _this = elem
           setTimeout (->
-            debugger
             @stoneColor = window.stones[0].stoneProperties.color
             _indexOfStone = _t.keysToIndex[@stoneColor]
             $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1))
