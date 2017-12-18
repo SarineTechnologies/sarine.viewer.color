@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 3:29:21 PM 
+sarine.viewer.color - v0.7.1 -  Sunday, December 17th, 2017, 3:14:54 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 
@@ -69,6 +69,9 @@ class SarineColor extends Viewer
     @resourcesPrefix = options.baseUrl + "atomic/v1/assets/"
     @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean"
     @atomConfig = configuration.experiences.filter((exp)-> exp.atom == "colorExperience")[0]
+    if(!@atomConfig)
+      @atomConfig  = configuration.experiences.filter((exp)-> exp.atom == "customHtml")[0]
+
     @resources = [
       {element:'link'   ,src:'owl.carousel.css'},
       #{element:'link'   ,src:'owl.theme.default.css'},
@@ -185,10 +188,11 @@ class SarineColor extends Viewer
     if(_t.keysToIndex.hasOwnProperty(@stoneColor))
       @owlCarousel = @element.find('.owl-carousel')
       @imagePath =  @colorAssets + "/"
-      if($(this.element).parent().parent().parent().parent().parent().hasClass('custom--colorExperience'))
-        $(@element).parent().parent().parent().parent().parent().parent().css({padding:"0!important"})
-      else
-        $(@element).parent().parent().parent().parent().css({padding:"0!important"})
+
+      _atomName =   if _t.atomConfig.atom == 'colorExperience'  then  _t.atomConfig.atom  else   _t.atomConfig.id
+      _cssElement = $('.slide.slide--'+_atomName).find('.slide__content--colorExperience')
+      _cssElement.removeClass('slide__content')
+      $('.slide.slide--'+_atomName).find('.slide__content--'+_atomName).removeClass('slide__content')
       @pattern = @atomConfig && @atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png'
       @filePrefix = @pattern.replace(/\*.[^/.]+$/,'')
       @fileExt = ".#{@pattern.split('.').pop()}"

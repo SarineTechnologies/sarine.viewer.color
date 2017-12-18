@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 3:29:21 PM 
+sarine.viewer.color - v0.7.1 -  Sunday, December 17th, 2017, 3:14:54 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -149,6 +149,11 @@ sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 3:29:21 PM
       this.atomConfig = configuration.experiences.filter(function(exp) {
         return exp.atom === "colorExperience";
       })[0];
+      if (!this.atomConfig) {
+        this.atomConfig = configuration.experiences.filter(function(exp) {
+          return exp.atom === "customHtml";
+        })[0];
+      }
       this.resources = [
         {
           element: 'link',
@@ -283,22 +288,17 @@ sarine.viewer.color - v0.7.1 -  Thursday, December 14th, 2017, 3:29:21 PM
     };
 
     SarineColor.prototype.full_init = function() {
-      var defer, i, newImage, newSpan, _t;
+      var defer, i, newImage, newSpan, _atomName, _cssElement, _t;
       defer = $.Deferred();
       _t = this;
       this.stoneColor = window.stones[0].stoneProperties.color;
       if (_t.keysToIndex.hasOwnProperty(this.stoneColor)) {
         this.owlCarousel = this.element.find('.owl-carousel');
         this.imagePath = this.colorAssets + "/";
-        if ($(this.element).parent().parent().parent().parent().parent().hasClass('custom--colorExperience')) {
-          $(this.element).parent().parent().parent().parent().parent().parent().css({
-            padding: "0!important"
-          });
-        } else {
-          $(this.element).parent().parent().parent().parent().css({
-            padding: "0!important"
-          });
-        }
+        _atomName = _t.atomConfig.atom === 'colorExperience' ? _t.atomConfig.atom : _t.atomConfig.id;
+        _cssElement = $('.slide.slide--' + _atomName).find('.slide__content--colorExperience');
+        _cssElement.removeClass('slide__content');
+        $('.slide.slide--' + _atomName).find('.slide__content--' + _atomName).removeClass('slide__content');
         this.pattern = this.atomConfig && this.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
         this.filePrefix = this.pattern.replace(/\*.[^/.]+$/, '');
         this.fileExt = "." + (this.pattern.split('.').pop());
