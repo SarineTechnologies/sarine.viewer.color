@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.7.9 -  Monday, December 18th, 2017, 10:08:59 AM 
+sarine.viewer.color - v0.8.0 -  Monday, December 18th, 2017, 5:42:36 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 
@@ -65,7 +65,7 @@ class SarineColor extends Viewer
     @colorGradeMaps = {
       1: "D",2:"E",3:"F",4:"G", 5:"H" , 6:"I", 7:"J",8:"K", 9: "L",10:"M",11:"N",12:"O-P",13:"Q-R", 14:"S-T",15:"U-V",16: "W-X",17:"Y-Z"
     }
-    @keysToIndex= {      "D": 1,      "E" :2,      "F" :3,      "G" :4,      "H" :5,      "I" :6,      "J" :7,      "K" :8,      "L" :9,      "M" :10,      "N" :11,      "O-P":12,      "Q-R":13,      "S-T":14,      "U-V":15,      "W-X":16,      "Y-Z":17    }
+    @keysToIndex= {      "D": 1,      "E" :2,      "F" :3,      "G" :4,      "H" :5,      "I" :6,      "J" :7,      "K" :8,      "L" :9,      "M" :10,      "N" :11,      "OP":12,      "QR":13,      "ST":14,      "UV":15,      "WX":16,      "YZ":17    }
     @resourcesPrefix = options.baseUrl + "atomic/v1/assets/"
     @colorAssets = options.baseUrl + "atomic/v1/js/color-assets/clean"
     @atomConfig = configuration.experiences.filter((exp)-> exp.atom == "colorExperience")[0]
@@ -83,7 +83,7 @@ class SarineColor extends Viewer
     css =  '.owl-carousel .item{margin:2px;border-color: gray;cursor: pointer; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); transition: all 200ms ease-out; font: initial; }'
     css += '.owl-carousel .item img{  display: block;  width: 110%;  margin-left: -5%;  height: auto; }'
     css += '.owl-carousel  .owl-item{position:initial;}'
-    css += ".owl-item.active.center{    -webkit-transform: scale(1.3);    background: white;    z-index: 10000;    position: relative;}"
+    css += ".owl-item.active.center{    transform: scale(1.3);    background: white;    z-index: 10000;    position: relative;}"
     css+=  '.owl-stage {height:300px;padding-top:20px;}';
     css+=  '.owl-stage-outer {max-height:130px;    padding-top: 40px;}';
     head = document.head || document.getElementsByTagName('head')[0]
@@ -219,7 +219,6 @@ class SarineColor extends Viewer
           console.log('owl carousel initialized')
           _this = elem
           setTimeout (->
-            debugger
             @stoneColor = window.stones[0].stoneProperties.color
             _indexOfStone = _t.keysToIndex[@stoneColor]
             $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1))
