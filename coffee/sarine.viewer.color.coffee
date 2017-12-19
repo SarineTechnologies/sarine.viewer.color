@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.8.3 -  Monday, December 18th, 2017, 6:02:03 PM 
+sarine.viewer.color - v0.8.4 -  Tuesday, December 19th, 2017, 9:26:35 AM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -169,9 +169,9 @@ class SarineColor extends Viewer
             $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1))
           , 200
 
-        afterMove: () ->
-          $('owl-item').css({transform:"none"})
-          $('active').eq(1).css({transform:"scale(1.9)",zIndex:3000})
+        ##afterMove: () ->
+        ##  $('owl-item').css({transform:"none"})
+        ##  $('active').eq(1).css({transform:"scale(1.9)",zIndex:3000})
         onReady: () ->
           defer.resolve(@)
       });
