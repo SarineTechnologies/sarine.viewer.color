@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.8.42 -  Tuesday, December 19th, 2017, 9:51:38 AM 
+sarine.viewer.color - v0.8.43 -  Tuesday, December 19th, 2017, 2:41:05 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
@@ -158,8 +158,11 @@ class SarineColor extends Viewer
 
       @owlCarousel.owlCarousel({
         center: true,
-        dots: true,
-        margin:1,
+        onDragged : (event)->
+          console.log('owl carousel dragged ' + event)
+          $('.owl-item.active.center span').html($('.owl-item.active.center span').html())
+          _src = $('.owl-item.active.center img').attr('src')
+          $('.owl-item.active.center img').attr('src' ,_src)
         onInitialized : (elem)->
           console.log('owl carousel initialized')
           _this = elem
