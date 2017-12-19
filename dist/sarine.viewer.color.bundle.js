@@ -1,6 +1,6 @@
 
 /*!
-sarine.viewer.color - v0.8.44 -  Tuesday, December 19th, 2017, 4:09:52 PM 
+sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:22 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
@@ -325,11 +325,8 @@ sarine.viewer.color - v0.8.44 -  Tuesday, December 19th, 2017, 4:09:52 PM
         this.owlCarousel.owlCarousel({
           center: true,
           onDragged: function(event) {
-            var _src;
             console.log('owl carousel dragged ' + event);
-            $('.owl-item.active.center span').html($('.owl-item.active.center span').html());
-            _src = $('.owl-item.active.center img').attr('src');
-            return $('.owl-item.active.center img').attr('src', _src);
+            return $('.owl-item.active.center span').html('<span>' + $('.owl-item.active.center span').html() + '</span>');
           },
           onInitialized: function(elem) {
             var _this;
