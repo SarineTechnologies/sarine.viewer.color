@@ -1,12 +1,11 @@
 
 /*!
-sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM 
+sarine.viewer.color - v0.8.45 -  Monday, December 25th, 2017, 1:27:43 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
  */
 
 (function() {
   var SarineColor,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -14,7 +13,6 @@ sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM
     __extends(SarineColor, _super);
 
     function SarineColor(options) {
-      this.preloadAssets = __bind(this.preloadAssets, this);
       var css, head, style;
       SarineColor.__super__.constructor.call(this, options);
       this.isAvailble = true;
@@ -69,10 +67,10 @@ sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM
       this.resources = [
         {
           element: 'link',
-          src: 'owl.carousel.css'
+          src: this.resourcesPrefix + 'owl.carousel' + (location.hash.indexOf("debug") === 1 ? ".css" : ".min.css") + window.cacheVersion
         }, {
           element: 'script',
-          src: 'owl.carousel.min.js'
+          src: this.resourcesPrefix + 'owl.carousel' + (location.hash.indexOf("debug") === 1 ? ".js" : ".min.js") + window.cacheVersion
         }
       ];
       css = '.owl-carousel .item{margin:2px;border-color: gray;cursor: pointer; border: 2px; border-radius: 3px; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); -webkit-transition: all 200ms ease-out;-o-transition: all 200ms ease-out; transition: all 200ms ease-out; font: initial; }';
@@ -98,45 +96,6 @@ sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM
       return this.element.append('<div class="owl-carousel owl-theme"></div>');
     };
 
-    SarineColor.prototype.preloadAssets = function(callback) {
-      var element, loaded, resource, totalScripts, triggerCallback, _i, _len, _ref, _results;
-      loaded = 0;
-      totalScripts = this.resources.map(function(elm) {
-        return elm.element === 'script';
-      });
-      triggerCallback = function(callback) {
-        loaded++;
-        if (loaded === totalScripts.length - 1 && callback !== void 0) {
-          return setTimeout((function(_this) {
-            return function() {
-              return callback();
-            };
-          })(this), 500);
-        }
-      };
-      element;
-      _ref = this.resources;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        resource = _ref[_i];
-        element = document.createElement(resource.element);
-        if (resource.element === 'script') {
-          $(document.body).append(element);
-          element.onload = element.onreadystatechange = function() {
-            return triggerCallback(callback);
-          };
-          element.src = this.resourcesPrefix + resource.src + cacheVersion;
-          element.type = "text/javascript";
-        } else {
-          element.href = this.resourcesPrefix + resource.src + cacheVersion;
-          element.rel = "stylesheet";
-          element.type = "text/css";
-        }
-        _results.push($(document.head).prepend(element));
-      }
-      return _results;
-    };
-
     SarineColor.prototype.first_init = function() {
       var defer, _t;
       defer = $.Deferred();
@@ -146,14 +105,14 @@ sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM
         this.failed();
         defer.resolve(this);
       } else {
-        this.preloadAssets(function() {
+        this.loadAssets(this.resources, function() {
           var src;
           this.pattern = _t.atomConfig && _t.atomConfig.ImagePatternClean || 'colorscalemaster-stacked_*.png';
           this.firstImageName = this.pattern.replace("*", "1");
           src = _t.colorAssets + "/" + this.firstImageName + cacheVersion;
           return _t.loadImage(src).then(function(img) {
             if (img.src.indexOf('data:image') === -1 && img.src.indexOf('no_stone') === -1) {
-              return defer.resolve(_t);
+              defer.resolve(_t);
             } else {
               _t.isAvailble = false;
               _t.element.empty();
@@ -171,7 +130,7 @@ sarine.viewer.color - v0.8.45 -  Tuesday, December 19th, 2017, 4:53:23 PM
               });
               this.div.append(this.canvas);
               _t.element.append(this.div);
-              return defer.resolve(_t);
+              defer.resolve(_t);
             }
           });
         });
