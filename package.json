@@ -1,6 +1,6 @@
 {
-  "name": "sarine.viewer.image",
-  "title": "sarine.viewer.image",
+  "name": "sarine.viewer.color",
+  "title": "sarine.viewer.color",
   "repository": {
     "type": "git",
     "url": "https://github.com/SarineTechnologies/sarine.viewer.color.git#dev"

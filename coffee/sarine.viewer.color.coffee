@@ -1,5 +1,5 @@
 ###!
-sarine.viewer.color - v0.8.45 -  Monday, December 25th, 2017, 1:27:43 PM 
+sarine.viewer.color - v0.8.46 -  Tuesday, January 2nd, 2018, 5:15:09 PM 
  The source code, name, and look and feel of the software are Copyright © 2015 Sarine Technologies Ltd. All Rights Reserved. You may not duplicate, copy, reuse, sell or otherwise exploit any portion of the code, content or visual design elements without express written permission from Sarine Technologies Ltd. The terms and conditions of the sarine.com website (http://sarine.com/terms-and-conditions/) apply to the access and use of this software.
 ###
 class SarineColor extends Viewer
