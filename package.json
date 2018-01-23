@@ -5,6 +5,9 @@
     "type": "git",
     "url": "https://github.com/SarineTechnologies/sarine.viewer.color.git#dev"
   },
+  "dependencies": {
+    "sarine.viewer": "https://github.com/SarineTechnologies/sarine.viewer.git#dev"
+  },
   "devDependencies": {
     "grunt-git-release": "^0.1.3",
     "grunt": "^0.4.5",
@@ -32,13 +35,9 @@
     "install": "^0.1.8",
     "load-grunt-tasks": "^3.1.0",
     "owl.carousel": "^2.2.0"
-
   },
   "engines": {
     "node": "6.9.0"
   },
-  "version": "0.8.46",
-  "dependencies": {
-    "owl.carousel": "^2.2.0"
-  }
+  "version": "0.8.46"
 }
