@@ -149,7 +149,7 @@ module.exports = function(grunt) {
         {
             core = 
             [
-                'node_modules/sarine.viewer/coffee/sarine.viewer.bundle.coffee'
+                'node_modules/sarine.viewer/coffee/sarine.viewer.coffee'
             ]
 
             grunt.log.writeln("taking core files from node_modules");
@@ -158,7 +158,7 @@ module.exports = function(grunt) {
         {
             core = 
             [
-                '../../core/sarine.viewer/coffee/sarine.viewer.bundle.coffee'
+                '../../core/sarine.viewer/coffee/sarine.viewer.coffee'
             ]
 
             grunt.log.writeln("taking core files from parent folder");
