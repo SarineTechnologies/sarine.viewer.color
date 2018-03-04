@@ -38,7 +38,8 @@ class SarineColor extends Viewer
     head.appendChild(style)
 
     @domain = window.coreDomain
-    @numberOfImages =@atomConfig && @atomConfig.NumberOfImages || 17
+    @numberOfImages = @atomConfig && @atomConfig.NumberOfImages || 17
+    @colorProperty  = @atomConfig && @atomConfig.colorProperty || 'srnColor'
 
   convertElement : () ->
     @element.append '<div class="owl-carousel owl-theme"></div>'
@@ -47,7 +48,11 @@ class SarineColor extends Viewer
     defer = $.Deferred()
     _t = @
 
-    @stoneColor = window.stones[0].stoneProperties.color
+    if(@colorProperty=='srnColor')
+      @stoneColor = window.stones[0].stoneProperties.srnColor
+    else
+      @stoneColor = window.stones[0].stoneProperties.color
+
     if(!_t.keysToIndex.hasOwnProperty(@stoneColor))
         @failed()
         defer.resolve(@)

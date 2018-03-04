@@ -39,7 +39,7 @@
   "engines": {
     "node": "6.9.0"
   },
-  "version": "0.8.47",
+  "version": "0.8.48",
    "scripts": {
     "build": "npm install && grunt build",
     "dev": "grunt dev"
