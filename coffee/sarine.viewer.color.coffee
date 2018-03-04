@@ -49,7 +49,7 @@ class SarineColor extends Viewer
     _t = @
 
     if(@colorProperty=='srnColor')
-      @stoneColor = window.stones[0].SarineProperties.SarineColor
+      @stoneColor = window.stones[0].stoneProperties.srnColor
     else
       @stoneColor = window.stones[0].stoneProperties.color
 
