@@ -107,6 +107,8 @@ class SarineColor extends Viewer
     else
       @stoneColor = window.stones[0].stoneProperties.color
 
+      window.stoneColor = @stoneColor
+
     if(_t.keysToIndex.hasOwnProperty(@stoneColor))
       @owlCarousel = @element.find('.owl-carousel')
       @imagePath =  @colorAssets + "/"
@@ -143,11 +145,8 @@ class SarineColor extends Viewer
           console.log('owl carousel initialized')
           _this = elem
           setTimeout (->
-            if(@colorProperty=='srnColor')
-              @stoneColor = window.stones[0].stoneProperties.srnColor
-            else
-              @stoneColor = window.stones[0].stoneProperties.color
-            _indexOfStone = _t.keysToIndex[@stoneColor]
+             @globalStoneColor = window.stoneColor
+            _indexOfStone = _t.keysToIndex[@globalStoneColor]
             $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1))
           , 200
 
