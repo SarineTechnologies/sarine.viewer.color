@@ -152,14 +152,15 @@ class SarineColor extends Viewer
             else
               @stoneColor = window.stones[0].stoneProperties.color
             _indexOfStone = _t.keysToIndex[@stoneColor]
-            $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1))
-          , 200
-
+            $('.owl-carousel').trigger('to.owl.carousel',_indexOfStone-1)
+            defer.resolve(@)
+            )
+          ,200
         ##afterMove: () ->
         ##  $('owl-item').css({transform:"none"})
         ##  $('active').eq(1).css({transform:"scale(1.9)",zIndex:3000})
-        onReady: () ->
-          defer.resolve(@)
+        ## onReady: () ->
+        ## defer.resolve(@)
       });
     else
       defer.resolve(@)

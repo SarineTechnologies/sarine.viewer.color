@@ -1,0 +1,27 @@
+{
+  "name": "sarine.viewer",
+  "version": "0.3.6",
+  "main": "dist/sarine.viewer.js",
+  "ignore": [
+    ".git",
+    "node_modules",
+    "package.json",
+    "Gruntfile.js"
+  ],
+  "dependencies": {},
+  "exportsOverride": {
+    "sarine.*": {
+      "coffee": "**/*.coffee"
+    }
+  },
+  "homepage": "https://github.com/SarineTechnologies/sarine.viewer",
+  "_release": "0.3.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.6",
+    "commit": "4460f8ceb4b540308ea12410398bd4806eb9a04c"
+  },
+  "_source": "https://github.com/SarineTechnologies/sarine.viewer.git",
+  "_target": "v0.3.6",
+  "_originalSource": "https://github.com/SarineTechnologies/sarine.viewer.git"
+}
