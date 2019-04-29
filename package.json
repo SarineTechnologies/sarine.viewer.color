@@ -36,7 +36,7 @@
     "load-grunt-tasks": "^3.1.0",
     "owl.carousel": "^2.2.0"
   },
-  "version": "0.8.52",
+  "version": "0.8.53",
   "scripts": {
     "build": "grunt build",
     "dev": "grunt dev"
